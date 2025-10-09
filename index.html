@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тест по HTML</title>
+<style>
+  body {
+    font-family: "Segoe UI", sans-serif;
+    background: #f2f4f8;
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    max-width: 900px;
+    margin: 30px auto;
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+  .timer {
+    text-align: right;
+    font-weight: bold;
+    color: #b30000;
+    margin-bottom: 20px;
+  }
+  .question {
+    margin-bottom: 35px;
+    border: 2px solid #e8e8e8;
+    border-radius: 12px;
+    padding: 15px 20px;
+    background: #fafafa;
+  }
+  .question h3 {
+    margin-bottom: 10px;
+    color: #222;
+  }
+  label {
+    display: block;
+    margin: 8px 0;
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  label:hover {
+    background: #e6f3ff;
+  }
+  input[type="radio"] {
+    margin-right: 8px;
+    transform: scale(1.2);
+  }
+  button {
+    display: block;
+    width: 100%;
+    background: #4CAF50;
+    color: white;
+    font-size: 18px;
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  button:hover { background: #45a049; }
+  input[type="text"] {
+    width: 30%;
+    padding: 10px;
+    margin: 10px 1%;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+  @media (max-width: 600px) {
+    input[type="text"] { width: 100%; margin: 8px 0; }
+    .container { padding: 15px; }
+  }
+  #results {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 20px;
+    color: #333;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Тест по HTML</h1>
+  <div class="timer">Осталось: <span id="timer">40:00</span></div>
+  
+  <form id="quizForm">
+    <div>
+      <input type="text" id="firstName" placeholder="Имя" required>
+      <input type="text" id="lastName" placeholder="Фамилия" required>
+      <input type="text" id="className" placeholder="Класс (например, 8Б)" required>
+    </div>
+
+    <div id="questions"></div>
+    <button type="submit">Отправить ответы</button>
+  </form>
+  <div id="results"></div>
+</div>
+
+<script>
+const TOKEN = "6376109690:AAHLCl37mhw4E1DWWN59JqkqrgKT5-oDwag";
+const CHAT_ID = "-1002952470534";
+
+const questionsData = [
+  {q:"Что такое HTML?", a:["Язык программирования","Язык разметки веб-страниц","Компьютерная игра","Сайт"], correct:1},
+  {q:"Какой тег создаёт ссылку?", a:["<link>","<href>","<a>","<url>"], correct:2},
+  {q:"Как вставить изображение?", a:["<img>","<image>","<pic>","<src>"], correct:0},
+  {q:"Какой тег для заголовков?", a:["<head>","<h1>...<h6>","<header>","<title>"], correct:1},
+  {q:"Какой атрибут задаёт адрес изображения?", a:["link","src","href","url"], correct:1},
+  {q:"Какой тег создаёт нумерованный список?", a:["<ul>","<ol>","<li>","<list>"], correct:1},
+  {q:"Что делает тег <br>?", a:["Жирный текст","Перенос строки","Создаёт ссылку","Курсив"], correct:1},
+  {q:"Как создать комментарий в HTML?", a:["// ком","/* ком */","<!-- ком -->","# ком"], correct:2},
+  {q:"Какой тег создаёт таблицу?", a:["<table>","<tab>","<grid>","<tr>"], correct:0},
+  {q:"Что делает тег <strong>?", a:["Выделяет жирным","Добавляет картинку","Создаёт ссылку","Меняет цвет"], correct:0},
+  {q:"Какой тег задаёт параграф?", a:["<p>","<para>","<text>","<pg>"], correct:0},
+  {q:"Какой тег для курсивного текста?", a:["<i>","<em>","<italic>","Оба <i> и <em>"], correct:3},
+  {q:"Какой корневой элемент HTML страницы?", a:["<html>","<body>","<head>","<root>"], correct:0},
+  {q:"Какой тег определяет раздел или секцию?", a:["<div>","<section>","<span>","<group>"], correct:0},
+  {q:"Какой атрибут задаёт цель ссылки?", a:["target","href","link","url"], correct:0},
+  {q:"Какой тег создаёт ненумерованный список?", a:["<ol>","<ul>","<li>","<list>"], correct:1},
+  {q:"Что делает тег <hr>?", a:["Горизонтальная линия","Вертикальная линия","Перенос строки","Жирный текст"], correct:0},
+  {q:"Какой тег для заголовка страницы в браузере?", a:["<head>","<title>","<header>","<h1>"], correct:1},
+  {q:"Какой атрибут для альтернативного текста изображения?", a:["alt","title","src","text"], correct:0},
+  {q:"Какой тег для встраивания видео?", a:["<video>","<media>","<embed>","<movie>"], correct:0},
+  {q:"Что делает тег <em>?", a:["Выделяет курсивом","Жирный текст","Подчёркивает","Перечёркивает"], correct:0},
+  {q:"Какой тег для строки таблицы?", a:["<td>","<tr>","<th>","<table>"], correct:1},
+  {q:"Какой тег создаёт поле ввода?", a:["<input>","<text>","<field>","<entry>"], correct:0},
+  {q:"Какой тег для формы?", a:["<form>","<input>","<submit>","<button>"], correct:0},
+  {q:"Какой тег создаёт выпадающий список?", a:["<select>","<dropdown>","<list>","<option>"], correct:0},
+  {q:"Какой тег для ячейки таблицы?", a:["<td>","<tr>","<th>","<cell>"], correct:0},
+  {q:"Какой атрибут для класса элемента?", a:["id","class","name","type"], correct:1},
+  {q:"Какой тег отображает индикатор прогресса?", a:["<progress>","<bar>","<meter>","<indicator>"], correct:0},
+  {q:"Что делает тег <textarea>?", a:["Создаёт многострочное поле ввода","Однострочное поле ввода","Кнопку","Список"], correct:0},
+  {q:"Какой тег для кнопки?", a:["<button>","<input>","<submit>","<click>"], correct:0}
+];
+
+function escapeHtml(text) {
+  return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+}
+
+// Убедимся, что DOM загружен перед выполнением
+document.addEventListener("DOMContentLoaded", () => {
+  // создаём вопросы
+  const container = document.getElementById("questions");
+  questionsData.forEach((item, i) => {
+    const div = document.createElement("div");
+    div.className = "question";
+    div.innerHTML = `<h3>${i + 1}. ${escapeHtml(item.q)}</h3>` + item.a.map((ans, j) =>
+      `<label><input type="radio" name="q${i}" value="${j}" required> ${escapeHtml(ans)}</label>`
+    ).join("");
+    container.appendChild(div);
+  });
+
+  // таймер
+  let timeLeft = 40 * 60;
+  const timerEl = document.getElementById("timer");
+  let timerInterval = setInterval(() => {
+    const m = Math.floor(timeLeft / 60);
+    const s = timeLeft % 60;
+    timerEl.textContent = `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+    if (timeLeft > 0) {
+      timeLeft--;
+    } else {
+      clearInterval(timerInterval);
+      document.getElementById("quizForm").requestSubmit();
+    }
+  }, 1000);
+
+  // обработка формы
+  document.getElementById("quizForm").addEventListener("submit", e => {
+    e.preventDefault();
+    const first = document.getElementById("firstName").value.trim();
+    const last = document.getElementById("lastName").value.trim();
+    const className = document.getElementById("className").value.trim();
+    if (!first || !last || !className) { alert("Введите имя, фамилию и класс!"); return; }
+
+    clearInterval(timerInterval);
+
+    let score = 0;
+    questionsData.forEach((item, i) => {
+      const selected = document.querySelector(`input[name="q${i}"]:checked`);
+      if (selected) {
+        const isCorrect = parseInt(selected.value) === item.correct;
+        if (isCorrect) score++;
+        const selectedLabel = selected.parentElement;
+        selectedLabel.style.backgroundColor = isCorrect ? 'lightgreen' : 'lightcoral';
+        if (!isCorrect) {
+          const correctInput = document.querySelector(`input[name="q${i}"][value="${item.correct}"]`);
+          const correctLabel = correctInput.parentElement;
+          correctLabel.style.backgroundColor = 'lightgreen';
+        }
+      }
+    });
+
+    document.querySelectorAll('input[type="radio"]').forEach(r => r.disabled = true);
+    document.querySelector('button[type="submit"]').disabled = true;
+
+    const total = questionsData.length;
+    const percent = Math.round((score / total) * 100);
+
+    document.getElementById('results').innerHTML = `<h2>${first} ${last} (${className}), ваш результат: ${score}/${total} (${percent} баллов)</h2>`;
+
+    const text = `🧩 *Результат теста HTML:*
+👤 ${first} ${last} (Класс: ${className})
+✅ Правильных ответов: ${score}/${total}
+📊 ${percent} баллов
+⏰ Осталось времени: ${timerEl.textContent}`;
+
+    fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: CHAT_ID,
+        text: text,
+        parse_mode: "Markdown"
+      })
+    });
+  });
+});
+</script>
+</body>
+</html>
