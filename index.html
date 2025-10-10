@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="uz">
+<html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HTML bo‘yicha test</title>
+<title>Тест по HTML</title>
 <style>
   body {
     font-family: "Segoe UI", sans-serif;
@@ -90,18 +90,18 @@
 </head>
 <body>
 <div class="container">
-  <h1>HTML bo‘yicha test</h1>
-  <div class="timer">Qoldi: <span id="timer">40:00</span></div>
+  <h1>Тест по HTML</h1>
+  <div class="timer">Осталось времени: <span id="timer">40:00</span></div>
   
   <form id="quizForm">
     <div>
-      <input type="text" id="firstName" placeholder="Ism" required>
-      <input type="text" id="lastName" placeholder="Familiya" required>
-      <input type="text" id="className" placeholder="Sinf (masalan, 8B)" required>
+      <input type="text" id="firstName" placeholder="Имя" required>
+      <input type="text" id="lastName" placeholder="Фамилия" required>
+      <input type="text" id="className" placeholder="Класс (например, 8Б)" required>
     </div>
 
     <div id="questions"></div>
-    <button type="submit">Javoblarni yuborish</button>
+    <button type="submit">Отправить ответы</button>
   </form>
   <div id="results"></div>
 </div>
@@ -111,36 +111,35 @@ const TOKEN = "6376109690:AAHLCl37mhw4E1DWWN59JqkqrgKT5-oDwag";
 const CHAT_ID = "-1002952470534";
 
 const questionsData = [
-  {q:"HTML nima?", a:["Dasturlash tili","Veb-sahifalar belgilash tili","Kompyuter o‘yini","Sayt"], correct:1},
-  {q:"Qaysi teg havola (ssilka) yaratadi?", a:["<link>","<href>","<a>","<url>"], correct:2},
-  {q:"Rasmni qanday joylashtirish mumkin?", a:["<img>","<image>","<pic>","<src>"], correct:0},
-  {q:"Qaysi teg sarlavhalar uchun ishlatiladi?", a:["<head>","<h1>...<h6>","<header>","<title>"], correct:1},
-  {q:"Rasm manzilini belgilovchi atribut qaysi?", a:["link","src","href","url"], correct:1},
-  {q:"Qaysi teg raqamlangan ro‘yxat yaratadi?", a:["<ul>","<ol>","<li>","<list>"], correct:1},
-  {q:"<br> tegi nima qiladi?", a:["Qalin matn","Yangi qatordan boshlaydi","Havola yaratadi","Kursiv qiladi"], correct:1},
-  {q:"HTMLda izoh (komment) qanday yoziladi?", a:["// izoh","/* izoh */","<!-- izoh -->","# izoh"], correct:2},
-  {q:"Qaysi teg jadval (table) yaratadi?", a:["<table>","<tab>","<grid>","<tr>"], correct:0},
-  {q:"<strong> tegi nima qiladi?", a:["Matnni qalin qiladi","Rasm qo‘shadi","Havola yaratadi","Rangni o‘zgartiradi"], correct:0},
-  {q:"Paragraf (abzas) tegi qaysi?", a:["<p>","<para>","<text>","<pg>"], correct:0},
-  {q:"Kursiv matn uchun qaysi teg ishlatiladi?", a:["<i>","<em>","<italic>","<i> va <em> ikkalasi"], correct:3},
-  {q:"HTML sahifasining ildiz (asosiy) elementi qaysi?", a:["<html>","<body>","<head>","<root>"], correct:0},
-  {q:"Bo‘lim (section) yaratadigan teg qaysi?", a:["<div>","<section>","<span>","<group>"], correct:0},
-  {q:"Havola yo‘nalishini belgilovchi atribut qaysi?", a:["target","href","link","url"], correct:0},
-  {q:"Raqamlanmagan ro‘yxat qaysi teg bilan yaratiladi?", a:["<ol>","<ul>","<li>","<list>"], correct:1},
-  {q:"<hr> tegi nima qiladi?", a:["Gorizontal chiziq qo‘yadi","Vertikal chiziq qo‘yadi","Yangi qator","Qalin matn"], correct:0},
-  {q:"Brauzer sarlavhasidagi matn uchun qaysi teg ishlatiladi?", a:["<head>","<title>","<header>","<h1>"], correct:1},
-  {q:"Rasm uchun alternativ matn atributi qaysi?", a:["alt","title","src","text"], correct:0},
-  {q:"Video joylashtirish uchun qaysi teg ishlatiladi?", a:["<video>","<media>","<embed>","<movie>"], correct:0},
-  {q:"<em> tegi nima qiladi?", a:["Kursiv bilan ajratadi","Qalin qiladi","Tagiga chizadi","Ustidan chizadi"], correct:0},
-  {q:"Jadvaldagi qator uchun teg qaysi?", a:["<td>","<tr>","<th>","<table>"], correct:1},
-  {q:"Ma’lumot kiritish maydoni uchun teg qaysi?", a:["<input>","<text>","<field>","<entry>"], correct:0},
-  {q:"Forma (anketa) yaratish uchun qaysi teg ishlatiladi?", a:["<form>","<input>","<submit>","<button>"], correct:0},
-  {q:"Tanlash (dropdown) ro‘yxati uchun qaysi teg?", a:["<select>","<dropdown>","<list>","<option>"], correct:0},
-  {q:"Jadvaldagi katak (hujayra) uchun qaysi teg?", a:["<td>","<tr>","<th>","<cell>"], correct:0},
-  {q:"Elementning klassini belgilovchi atribut qaysi?", a:["id","class","name","type"], correct:1},
-  {q:"Progres indikatorini ko‘rsatadigan teg qaysi?", a:["<progress>","<bar>","<meter>","<indicator>"], correct:0},
-  {q:"<textarea> tegi nima qiladi?", a:["Ko‘p qatorli matn maydoni yaratadi","Bitta qatorli matn maydoni","Tugma","Ro‘yxat"], correct:0},
-  {q:"Tugma yaratish uchun qaysi teg?", a:["<button>","<input>","<submit>","<click>"], correct:0}
+  {q:"Что такое HTML?", a:["Язык программирования","Язык разметки веб-страниц","Компьютерная игра","Сайт"], correct:1},
+  {q:"Какой тег создаёт ссылку?", a:["<link>","<href>","<a>","<url>"], correct:2},
+  {q:"Как вставить изображение на страницу?", a:["<img>","<image>","<pic>","<src>"], correct:0},
+  {q:"Какой тег используется для заголовков?", a:["<head>","<h1>...<h6>","<header>","<title>"], correct:1},
+  {q:"Какой атрибут задаёт путь к изображению?", a:["link","src","href","url"], correct:1},
+  {q:"Какой тег создаёт нумерованный список?", a:["<ul>","<ol>","<li>","<list>"], correct:1},
+  {q:"Что делает тег <br>?", a:["Делает текст жирным","Начинает с новой строки","Создаёт ссылку","Делает курсив"], correct:1},
+  {q:"Как в HTML пишутся комментарии?", a:["// комментарий","/* комментарий */","<!-- комментарий -->","# комментарий"], correct:2},
+  {q:"Какой тег создаёт таблицу?", a:["<table>","<tab>","<grid>","<tr>"], correct:0},
+  {q:"Что делает тег <strong>?", a:["Делает текст жирным","Добавляет изображение","Создаёт ссылку","Меняет цвет"], correct:0},
+  {q:"Какой тег используется для абзаца?", a:["<p>","<para>","<text>","<pg>"], correct:0},
+  {q:"Какой тег используется для выделения части страницы?", a:["<div>","<section>","<a>","<h3>"], correct:0},
+  {q:"Какой элемент является корневым в HTML-документе?", a:["<html>","<body>","<head>","<root>"], correct:0},
+  {q:"Какой тег создаёт раздел (section)?", a:["<div>","<section>","<span>","<group>"], correct:1},
+  {q:"Какой атрибут задаёт направление ссылки?", a:["target","href","link","url"], correct:1},
+  {q:"Какой тег создаёт ненумерованный список?", a:["<ol>","<ul>","<li>","<list>"], correct:1},
+  {q:"Что делает тег <hr>?", a:["Добавляет горизонтальную линию","Добавляет вертикальную линию","Начинает новую строку","Делает текст жирным"], correct:0},
+  {q:"Какой тег задаёт текст в заголовке вкладки браузера?", a:["<head>","<title>","<header>","<h1>"], correct:1},
+  {q:"Какой атрибут задаёт альтернативный текст для изображения?", a:["alt","title","src","text"], correct:0},
+  {q:"Какой тег используется для вставки видео?", a:["<video>","<media>","<embed>","<movie>"], correct:0},
+  {q:"Какой тег создаёт строку таблицы?", a:["<td>","<tr>","<th>","<table>"], correct:1},
+  {q:"Какой тег создаёт поле для ввода данных?", a:["<input>","<text>","<field>","<entry>"], correct:0},
+  {q:"Какой тег создаёт форму (анкету)?", a:["<form>","<input>","<submit>","<button>"], correct:0},
+  {q:"Какой тег используется для выпадающего списка?", a:["<select>","<dropdown>","<list>","<option>"], correct:0},
+  {q:"Какой тег создаёт ячейку таблицы?", a:["<td>","<tr>","<th>","<cell>"], correct:0},
+  {q:"Какой атрибут задаёт класс элемента?", a:["id","class","name","type"], correct:1},
+  {q:"Какой тег показывает индикатор выполнения?", a:["<progress>","<bar>","<meter>","<indicator>"], correct:0},
+  {q:"Что делает тег <textarea>?", a:["Создаёт многострочное текстовое поле","Создаёт однострочное поле","Создаёт кнопку","Создаёт список"], correct:0},
+  {q:"Какой тег создаёт кнопку?", a:["<button>","<input>","<submit>","<click>"], correct:0}
 ];
 
 function escapeHtml(text) {
@@ -177,7 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const first = document.getElementById("firstName").value.trim();
     const last = document.getElementById("lastName").value.trim();
     const className = document.getElementById("className").value.trim();
-    if (!first || !last || !className) { alert("Ism, familiya va sinfni kiriting!"); return; }
+    if (!first || !last || !className) { alert("Введите имя, фамилию и класс!"); return; }
 
     clearInterval(timerInterval);
 
@@ -203,13 +202,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const total = questionsData.length;
     const percent = Math.round((score / total) * 100);
 
-    document.getElementById('results').innerHTML = `<h2>${first} ${last} (${className}), sizning natijangiz: ${score}/${total} (${percent} ball)</h2>`;
+    document.getElementById('results').innerHTML = `<h2>${first} ${last} (${className}), ваш результат: ${score}/${total} (${percent} баллов)</h2>`;
 
-    const text = `🧩 *HTML testi natijasi:*
-👤 ${first} ${last} (Sinf: ${className})
-✅ To‘g‘ri javoblar: ${score}/${total}
-📊 ${percent} ball
-⏰ Qolgan vaqt: ${timerEl.textContent}`;
+    const text = `🧩 *Результат теста по HTML:*
+👤 ${first} ${last} (Класс: ${className})
+✅ Правильных ответов: ${score}/${total}
+📊 ${percent} баллов
+⏰ Осталось времени: ${timerEl.textContent}`;
 
     fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
       method: "POST",
@@ -225,4 +224,3 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </html>
-<h1>https://fathullalatipov.github.io/test_for_st1295/</h1>
