@@ -111,35 +111,16 @@ const TOKEN = "6376109690:AAHLCl37mhw4E1DWWN59JqkqrgKT5-oDwag";
 const CHAT_ID = "-1002952470534";
 
 const questionsData = [
-  {q:"Что такое HTML?", a:["Язык программирования","Язык разметки веб-страниц","Компьютерная игра","Сайт"], correct:1},
-  {q:"Какой тег создаёт ссылку?", a:["<link>","<href>","<a>","<url>"], correct:2},
-  {q:"Как вставить изображение на страницу?", a:["<img>","<image>","<pic>","<src>"], correct:0},
-  {q:"Какой тег используется для заголовков?", a:["<head>","<h1>...<h6>","<header>","<title>"], correct:1},
-  {q:"Какой атрибут задаёт путь к изображению?", a:["link","src","href","url"], correct:1},
-  {q:"Какой тег создаёт нумерованный список?", a:["<ul>","<ol>","<li>","<list>"], correct:1},
-  {q:"Что делает тег <br>?", a:["Делает текст жирным","Начинает с новой строки","Создаёт ссылку","Делает курсив"], correct:1},
-  {q:"Как в HTML пишутся комментарии?", a:["// комментарий","/* комментарий */","<!-- комментарий -->","# комментарий"], correct:2},
-  {q:"Какой тег создаёт таблицу?", a:["<table>","<tab>","<grid>","<tr>"], correct:0},
-  {q:"Что делает тег <strong>?", a:["Делает текст жирным","Добавляет изображение","Создаёт ссылку","Меняет цвет"], correct:0},
-  {q:"Какой тег используется для абзаца?", a:["<p>","<para>","<text>","<pg>"], correct:0},
-  {q:"Какой тег используется для выделения части страницы?", a:["<div>","<section>","<a>","<h3>"], correct:0},
-  {q:"Какой элемент является корневым в HTML-документе?", a:["<html>","<body>","<head>","<root>"], correct:0},
-  {q:"Какой тег создаёт раздел (section)?", a:["<div>","<section>","<span>","<group>"], correct:1},
-  {q:"Какой атрибут задаёт направление ссылки?", a:["target","href","link","url"], correct:1},
-  {q:"Какой тег создаёт ненумерованный список?", a:["<ol>","<ul>","<li>","<list>"], correct:1},
-  {q:"Что делает тег <hr>?", a:["Добавляет горизонтальную линию","Добавляет вертикальную линию","Начинает новую строку","Делает текст жирным"], correct:0},
-  {q:"Какой тег задаёт текст в заголовке вкладки браузера?", a:["<head>","<title>","<header>","<h1>"], correct:1},
-  {q:"Какой атрибут задаёт альтернативный текст для изображения?", a:["alt","title","src","text"], correct:0},
-  {q:"Какой тег используется для вставки видео?", a:["<video>","<media>","<embed>","<movie>"], correct:0},
-  {q:"Какой тег создаёт строку таблицы?", a:["<td>","<tr>","<th>","<table>"], correct:1},
-  {q:"Какой тег создаёт поле для ввода данных?", a:["<input>","<text>","<field>","<entry>"], correct:0},
-  {q:"Какой тег создаёт форму?", a:["<form>","<input>","<submit>","<button>"], correct:0},
-  {q:"Какой тег используется для выпадающего списка?", a:["<select>","<dropdown>","<list>","<option>"], correct:0},
-  {q:"Какой тег создаёт ячейку таблицы?", a:["<td>","<tr>","<th>","<cell>"], correct:0},
-  {q:"Какой атрибут задаёт класс элемента?", a:["id","class","name","type"], correct:1},
-  {q:"Какой тег показывает индикатор выполнения?", a:["<progress>","<bar>","<meter>","<indicator>"], correct:0},
-  {q:"Что делает тег <textarea>?(первый вариант правильный)", a:["Создаёт многострочное текстовое поле","Создаёт однострочное поле","Создаёт кнопку","Создаёт список"], correct:0},
-  {q:"Какой тег создаёт кнопку?", a:["<button>","<input>","<submit>","<click>"], correct:0}
+  {q:"HTML nima?", a:["Kompyuter o‘yini","Sayt yaratish tili","Rasm tili","Matematika tili"], correct:1},
+  {q:"<h1> tegi nima qiladi?", a:["Katta sarlavha yozadi","Rasm chizadi","Rang o‘zgartiradi","Tugma yaratadi"], correct:0},
+  {q:"<p> tegi nima uchun?", a:["Paragraf (matn bo‘lagi) yozish","Rasm qo‘shish","Sarlavha yozish","Tugma yaratish"], correct:0},
+  {q:"<img> tegi nima qiladi?", a:["Rasm qo‘shadi","Matn yozadi","Ro‘yxat yaratadi","Video qo‘yadi"], correct:0},
+  {q:"<a> tegi nima uchun ishlatiladi?", a:["Havola (link) yaratish","Rasm chizish","Tugma yaratish","Matn yozish"], correct:0},
+  {q:"<br> tegi nima qiladi?", a:["Yangi qatordan boshlaydi","Matnni qalin qiladi","Sarlavha yaratadi","Rasm qo‘yadi"], correct:0},
+  {q:"<ul> tegi nima qiladi?", a:["Nuqtali ro‘yxat yaratadi","Rasm joylaydi","Tugma yaratadi","Video qo‘yadi"], correct:0},
+  {q:"<button> tegi nima uchun?", a:["Tugma yaratish","Matn yozish","Rasm joylash","Rang berish"], correct:0},
+  {q:"<title> tegi nima qiladi?", a:["Sahifa nomini ko‘rsatadi","Rasm chizadi","Matn qalin qiladi","Ro‘yxat yaratadi"], correct:0},
+  {q:"<body> tegi nima uchun?", a:["Sahifadagi hamma ko‘rinadigan narsalar shu yerda bo‘ladi","Faqat sarlavha uchun","Faqat rasm uchun","Faqat rang uchun"], correct:0}
 ];
 
 function escapeHtml(text) {
